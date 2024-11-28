@@ -1,0 +1,22 @@
+[package]
+name = "time-submodule"
+version = "0.1.0"
+edition = "2021"
+
+#[source.crates-io]
+#replace-with = "vendored-sources"
+
+#[source.vendored-sources]
+##git2 = { directory = "git2"}
+#openssl-sys = {directory = "openssl-sys"}
+#openssl = {directory = "openssl"}
+
+[dependencies]
+git2 = "0.19.0"
+openssl = "0.10.68"
+openssl-sys = "0.9.104"
+#//org-rust = "0.1.5"
+orgize = { version = "0.10.0-alpha.10" }
+tracing-subscriber = "0.3.18"
+
+

@@ -1,0 +1,70 @@
+The error message you're encountering indicates that the type ~T~ in your code does not implement
+the ~std::fmt::Debug~ trait. This means that Rust's ~println!~ macro cannot format the value of ~c~
+using the ~{:#?}~ placeholder, which is used for debugging-level output.
+
+To resolve this issue, you have a few options:
+
+1. *Implement the ~Debug~ Trait for Your Type*:
+   If possible, add the ~Debug~ trait implementation to your type ~T~. This will allow you to use
+   the ~{:#?}~ format specifier with instances of ~c~.
+#+BEGIN_SRC rust
+   #[derive(Debug)]
+   struct MyType {
+       // fields here
+   }
+
+   fn main() {
+       let c = MyType { /* initialize fields */ };
+       println!("test: {:#?}", c);
+   }
+#+END_SRC
+
+2. *Restrict the Type Parameter to Implement ~Debug~*:
+   If you cannot implement the ~Debug~ trait for your type, you can restrict the type parameter in
+   your function or method signature to only accept types that implement the ~Debug~ trait.
+#+BEGIN_SRC rust
+   fn print_debug<T: Debug>(c: T) {
+       println!("test: {:#?}", c);
+   }
+
+   fn main() {
+       let c = /* some value that implements Debug */;
+       print_debug(c);
+   }
+#+END_SRC
+
+3. *Use a Different Format Specifier*:
+   If you don't need the debugging-level output, you can use a different format specifier that
+   doesn't require ~Debug~ implementation.
+#+BEGIN_SRC rust
+   fn main() {
+       let c = /* some value */;
+       println!("test: {:?}", c);
+   }
+#+END_SRC
+
+4. *Implement ~Display~ Trait*:
+   If you only need to print the type in a user-friendly way, consider implementing the ~Display~
+   trait instead of ~Debug~.
+#+BEGIN_SRC rust
+   use std::fmt;
+
+   struct MyType {
+       // fields here
+   }
+
+   impl fmt::Display for MyType {
+       fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+           write!(f, "MyType {{ /* display fields */ }}")
+       }
+   }
+
+   fn main() {
+       let c = MyType { /* initialize fields */ };
+       println!("test: {}", c);
+   }
+#+END_SRC
+
+Choose the option that best fits your use case. If you need debugging-level output and cannot
+implement ~Debug~, consider using a different format specifier or implementing ~Display~ for
+user-friendly output.

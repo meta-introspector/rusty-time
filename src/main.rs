@@ -1,28 +1,30 @@
 //use org::parser::Parser;
 //use orgize::Org;
 use orgize::rowan::ast::AstNode;
-use tracing_subscriber::fmt::format::FmtSpan;
+//use tracing_subscriber::fmt::format::FmtSpan;
 
 //..fn main() {
 //    let args: Vec<_> = args().collect();
 
 use orgize::{
     export::{from_fn, Container, Event},
-    SyntaxElement,
-    SyntaxKind,
+//    SyntaxElement,
+//    SyntaxKind,
     Org,
 //    ast::{LIST_ITEM_CONTENT,PARAGRAPH,TEXT},
     //syntax::{OrgLanguage, SyntaxNode},
 };
 
-use git2::{Config, Repository, Submodule};
+//use git2::{Config, Repository, Submodule};
 use std::{
     fs,
-    path::{Path, PathBuf},
+    path::{Path,
+	   //PathBuf
+    },
 };
 
 fn generic_walk<T:std::fmt::Debug>(name:&str, depth:i16, c:&T){
-    println!("test: {:#?}", c);
+    println!("generic: {:#?} {:#?} {:#?}", name, depth, c);
 //    for c2 in c.children() {
 	//println!("test2: {:#?}", c2);
 //	generic_walk("generic",depth+1,c2,)
@@ -31,38 +33,30 @@ fn generic_walk<T:std::fmt::Debug>(name:&str, depth:i16, c:&T){
 
 fn main() {
 
-    tracing_subscriber::fmt()
-        .without_time()
-        .with_file(true)
-        .with_span_events(FmtSpan::NEW)
-        .with_line_number(true)
-//        .with_max_level(tracing::Level::TRACE)
-        .with_file(false)
-        .with_line_number(false)
-        .init();
-
-    let args: Vec<String> = std::env::args().collect();    
+    let args: Vec<String> = std::env::args().collect();
+    println!("hello: {:#?}\n", args);
     if args.len() < 2 {
         eprintln!("Usage: cargo run <filename.org>");
         return;
     }
     let file_path = Path::new(&args[1]);
-    //println!("got this path: {}", file_path.display());   
+    println!("got this path: {}\n", file_path.display());
+        
     let contents = fs::read_to_string(file_path).expect("Failed to read the file");
     let parse_org = Org::parse(&contents);
-    let mut parser_output = parse_org;    
+    let parser_output = parse_org;    
     let mut handler = from_fn(|event| {
 	match event {
 	    Event::Enter(Container::Headline(headline)) => {
 		//println!("headline: {:#?}", headline);
 		let hl = orgize::ast::Headline::syntax(&headline);
 		generic_walk("headline",1,hl);
-		println!("test1: {:#?}", hl);
+		//println!("test1: {:#?}", hl);
 	    }
 	    Event::Enter(Container::Section(section)) => {
 		let sc = &orgize::ast::Section::syntax(&section);
 		generic_walk("section",2,sc);
-		println!("test2: {:#?}", sc);
+		//println!("test2: {:#?}", sc);
 	        //println!("section syntax other: {:#?}", orgize::ast::Section::syntax(&section).first_child().expect("oops"));
 		
 		// for c in orgize::ast::Section::syntax(&section).first_child().expect("oops").children() {
@@ -81,11 +75,12 @@ fn main() {
 	    _=> {
 		//println!("OTTHER: {:#?}", event);
 		generic_walk("other",3,&event);
-		println!("test3: {:#?}", event);
+		//println!("test3: {:#?}", event);
 	    }
 	}
     });
-    //parser_output.traverse(&mut handler);
+    //println!("test2: {:#?}", sc);
+    parser_output.traverse(&mut handler);
     
     
 //    parser_output.

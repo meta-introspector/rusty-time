@@ -1,0 +1,125 @@
+From the output and context, we can infer that the ~.org~ file follows an outline-based format with
+sections, headlines, paragraphs, lists, and source code blocks. Here's a breakdown of its structure:
+
+1. *Document*: The entire document is enclosed within a ~Document~ block.
+2. *Sections*: The document contains multiple sections denoted by ~SECTION~.
+3. *Headlines*: Sections can have headlines with stars (~*~) indicating the level of depth.
+4. *Paragraphs*: Text and code blocks are organized into paragraphs.
+5. *Lists*: Items in a section or headline can be listed using bullet points.
+6. *Source Blocks*: Code examples are enclosed within ~SOURCE_BLOCK~ blocks.
+
+To model this structure in Rust, we can create an enum to represent different elements of the
+document:
+#+BEGIN_SRC rust
+#[derive(Debug)]
+enum DocumentElement {
+    Document(Document),
+}
+
+#[derive(Debug)]
+struct Document {
+    sections: Vec<Section>,
+}
+
+#[derive(Debug)]
+struct Section {
+    title: String,
+    depth: usize,
+    contents: Vec<Content>,
+}
+
+#[derive(Debug)]
+enum Content {
+    Paragraph(Paragraph),
+    List(List),
+    SourceBlock(SourceBlock),
+}
+
+#[derive(Debug)]
+struct Paragraph {
+    text: String,
+    codes: Vec<String>,
+}
+
+#[derive(Debug)]
+struct List {
+    items: Vec<ListItem>,
+}
+
+#[derive(Debug)]
+struct ListItem {
+    content: Paragraph,
+}
+
+#[derive(Debug)]
+struct SourceBlock {
+    language: String,
+    content: String,
+}
+#+END_SRC
+
+Here is a function to parse the ~.org~ file and build the corresponding structure:
+#+BEGIN_SRC rust
+use std::fs;
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let file_path = "path/to/plan1.org";
+    let contents = fs::read_to_string(file_path)?;
+
+    let document = parse_document(&contents);
+
+    println!("{:#?}", document);
+
+    Ok(())
+}
+
+fn parse_document(contents: &str) -> Document {
+    // Implement parsing logic here
+    // For simplicity, return a basic structure for demonstration
+
+    let mut sections = Vec::new();
+    let lines = contents.lines();
+
+    for line in lines {
+        if line.starts_with('*') {
+            let depth = line.chars().take_while(|c| c == '*').count() - 1;
+            let title = &line[depth + 2..].trim_start();
+            sections.push(Section {
+                title: title.to_string(),
+                depth,
+                contents: Vec::new(),
+            });
+        } else if line.starts_with(' ') && !line.trim().is_empty() {
+            if let Some(section) = sections.last_mut() {
+                section.contents.push(parse_content(line.trim_start()));
+            }
+        }
+    }
+
+    Document { sections }
+}
+
+fn parse_content(content_line: &str) -> Content {
+    if content_line.contains('~') {
+        let codes: Vec<&str> = content_line.split('~').skip(1).map(|s| s.trim()).collect();
+        Paragraph { text: "".to_string(), codes }
+    } else if content_line.starts_with("SRC_BLOCK_LANGUAGE") {
+        SourceBlock {
+            language: "some_language".to_string(),
+            content: content_line.to_string(),
+        }
+    } else {
+        Paragraph {
+            text: content_line.to_string(),
+            codes: Vec::new(),
+        }
+    }
+}
+#+END_SRC
+
+This code provides a basic structure for parsing an ~.org~ file. The ~parse/document~ function reads
+the lines and builds sections and paragraphs accordingly. The ~parse/content~ function handles
+different types of content, including paragraphs with inline code and source blocks.
+
+The actual parsing logic is simplified here; you can expand it to handle all possible cases in an
+~.org~ file as needed.
