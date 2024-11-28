@@ -57,7 +57,7 @@ fn main() {
 		    for c2 in c.children() {
 			//println!("test2: {:#?}", c2);
 			for c3 in c2.children() {
-			    println!("test3: {:#?}", c3.text().to_string().trim());
+			    println!("git submodule add {:#?}", c3.text().to_string().trim());
 			    //for c4 in c3.children() {
 			    //		println!("test4: {:#?}", c4);
 			    //}
