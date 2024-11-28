@@ -1,0 +1,109 @@
+Creating a multi-level prompt generator for Large Language Models (LLMs) involves several steps. The
+goal is to design a system that can dynamically generate prompts at different levels of complexity
+based on the input requirements. Below is a high-level approach to achieve this using LLMs:
+
+*** Step 1: Define Prompt Templates
+First, define a set of prompt templates that cover various levels of complexity and types of
+questions or tasks. For example:
+
+- *Level 1*: Basic question
+#+END_SRC
+  What is the capital of {country}?
+#+END_SRC
+
+- *Level 2*: Multi-part question
+#+END_SRC
+  Describe the process of photosynthesis step-by-step.
+#+END_SRC
+
+- *Level 3*: Critical thinking
+#+END_SRC
+  If A causes B and B causes C, what does that imply about A and C?
+#+END_SRC
+
+*** Step 2: Create a Hierarchical Prompt Structure
+Design a hierarchical structure where each level builds upon the previous one. This could be
+achieved using nested templates or by using LLMs to dynamically generate prompts at different
+levels.
+
+- *Level 1*: Basic questions
+#+END_SRC
+  What is the capital of {country}?
+#+END_SRC
+
+- *Level 2*: Multi-part questions
+#+END_SRC
+  Describe the process of photosynthesis step-by-step.
+#+END_SRC
+
+- *Level 3*: Critical thinking
+#+END_SRC
+  If A causes B and B causes C, what does that imply about A and C?
+#+END_SRC
+
+*** Step 3: Implement the Prompt Generator
+Use an LLM to dynamically generate prompts based on the input requirements. This could involve using
+a pre-trained LLM to suggest appropriate templates or levels of complexity.
+
+- *Input*: User request (e.g., "I need a critical thinking question about photosynthesis.")
+- *LLM Generation*: The LLM generates a prompt at the appropriate level, such as:
+#+END_SRC
+  If A causes B and B causes C, what does that imply about A and C in relation to photosynthesis?
+#+END_SRC
+
+*** Step 4: Fill Out Prompt Templates
+Once an appropriate template is generated, use another LLM to fill out the placeholders. For
+example:
+
+- *Input*: "I need a basic question about France."
+- *LLM Generation*: Generate a prompt:
+#+END_SRC
+  What is the capital of France?
+#+END_SRC
+
+*** Step 5: Evaluation and Feedback Loop
+Implement an evaluation mechanism to measure the effectiveness of the generated prompts. Use
+feedback from users to refine the templates and LLMs over time.
+
+*** Example Code (Pseudo-code)
+#+BEGIN_SRC python
+def generate_prompt(user_request):
+    # Step 1: Determine appropriate template level
+    if "basic" in user_request:
+        template_level = 1
+    elif "multi-part" in user_request:
+        template_level = 2
+    else:
+        template_level = 3
+    
+    # Step 2: Generate a prompt using an LLM
+    prompt_template = get_prompt_template(template_level)
+    filled_prompt = fill_out_template(prompt_template, user_request)
+    
+    return filled_prompt
+
+def get_prompt_template(level):
+    if level == 1:
+        return "What is the capital of {country}?"
+    elif level == 2:
+        return "Describe the process of {topic} step-by-step."
+    else:
+        return "If A causes B and B causes C, what does that imply about A and C in relation to {topic}?"
+
+def fill_out_template(template, user_request):
+    # Use another LLM to fill out the placeholders
+    filled_prompt = template.format(country=user_request.get("country", ""),
+                                    topic=user_request.get("topic", ""))
+    return filled_prompt
+
+# Example usage
+user_request = {"country": "France"}
+prompt = generate_prompt(user_request)
+print(prompt)  # Output: What is the capital of France?
+#+END_SRC
+
+*** Conclusion
+This multi-level prompt generator uses LLMs to dynamically generate and fill out prompts at
+different levels of complexity based on user requests. By iterating and refining the templates and
+feedback loops, you can create a robust system for generating high-quality prompts for various
+applications.

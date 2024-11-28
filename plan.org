@@ -1,0 +1,131 @@
+* plan 
+this is the time submodule rust toolkit,
+it allows adding new submodules to the time of the metameme.
+each occurence or first encounter with another project creates a time entry
+in the submodule, or nested category submodule, or subsub module.
+the entries are related with commits that weave a narrative.
+
+
+* ideas
+Multi level meta-prompt generator and manipulator for llms using llms to generate and fill out prompt templates.
+the prompts should generate instructions for prompt manipulation at a higher term level
+High-level instruction: Generate a prompt that will generate and manipulate prompts for a scientific investigation
+ on the effects of introspection of llm latent space by using the prompts as experiments.
+you have the function "immediate(X)" and "deferred(X)" to construct new prompts
+
+*** generate a generator of generators of prompts
+prompts level C that generate prompts level D that generate prompts level A that generate prompts level B
+
+**** generator of generators of prompts.
+rewrite to be clearer:
+
+***** a prompt level A to generate prompts level B that generate prompts level C
+***** A top-level prompt (Level A) generates intermediate prompts (Level B), which then create more specific prompts (Level C).
+***** A top-level prompt (Level A) generates intermediate prompts (Level B), which then create more specific prompts (Level C).
+***** A top-level prompt (Level A)* generates intermediate prompts (Level B), which in turn create even more specific prompts (Level C).
+ 
+make examples of A,B,C and 
+
+***** generate Review prompts for prompt templates that generate more prompts
+To review and refine the effectiveness of prompt templates designed to generate additional prompts,
+consider these key points:
+
+1. *Clarity*: Ensure each template is clear and concise, allowing users to understand what exactly
+needs to be inputted.
+
+2. *Consistency*: Check if the templates maintain a consistent format or style, which helps in user
+retention and ease of use.
+
+3. *Usability*: Assess how intuitive it is for users to generate prompts using these templates. This
+includes evaluating the layout, button placement, and overall interface design.
+
+4. *Relevance*: Make sure that each template is relevant to its intended purpose and aligns with the
+goals or objectives of the tool or platform.
+
+5. *Feedback Mechanism*: Review whether there’s a mechanism in place for users to provide feedback
+on generated prompts. This helps in continuously improving the quality of output.
+
+6. *Error Handling*: Evaluate how well each template handles errors or mistakes, such as missing
+inputs or invalid data types. Provide clear guidance on how to correct these issues.
+
+7. *Performance*: Assess the performance of the templates in terms of speed and reliability. How
+quickly do they process user input and generate prompts?
+
+8. *Variety*: Check if the templates allow for a diverse range of prompt types, catering to
+different needs and contexts.
+
+9. *Customization Options*: Ensure that there are enough customization options available so users
+can tailor their prompts according to specific requirements.
+
+10. *User Experience (UX)*: Evaluate the overall user experience when generating prompts. Does it
+feel intuitive, engaging, and efficient?
+
+By focusing on these aspects, you can ensure that your prompt templates not only generate useful
+prompts but also provide an excellent user experience.
+
+eg: Generate a pattern language for prompt generators.
+eg: Generate a emoji grammar for prompt generators.
+*****  Generate a emoji grammar for emoji grammers.
+****** Emoji Grammar
+
+1. *Sentence Structure*: 
+   - Subject + Verb + Object
+
+2. *Parts of Speech*:
+   - *Subject (S)*: Emojis representing things or actions.
+   - *Verb (V)*: Emojis indicating the action performed by the subject.
+   - *Object (O)*: Emojis representing what is acted upon.
+
+3. *Punctuation and Conjunctions*:
+   - *Period (. )*: Used to end a sentence.
+   - *Comma (, )*: Used to separate elements in a list or for pauses in speech.
+   - *Colon (: )*: Used to introduce a list or explanation.
+   - *Semicolon (; )*: Used to connect related independent clauses.
+   - *Question Mark (?)*: Used at the end of an interrogative sentence.
+
+4. *Emojis as Adjectives and Adverbs*:
+   - Emoji can be used before a noun (adjective) or after a verb (adverb).
+
+*** Examples
+
+1. *Basic Sentence*:
+#+BEGIN_SRC
+   🌟 (Subject) + 😊 (Verb) + 🌈 (Object)
+#+END_SRC
+   - Meaning: The sun is smiling at the rainbow.
+
+2. *Sentence with Punctuation*:
+#+BEGIN_SRC
+   🎉 (Subject) + 🎉 (Verb, repeated for emphasis) + 🎂 (Object) + (. ) (Period)
+#+END_SRC
+   - Meaning: We're celebrating with a cake!
+
+3. *Complex Sentence with Adjectives and Adverbs*:
+#+BEGIN_SRC
+   🌱 (Subject) + 🌟 (Verb) + 🌈 (Object) + 😊 (Adverb, describes the action) + 🌶️ (Adjective,
+   modifies the subject)
+#+END_SRC
+   - Meaning: The green grass is shining at the rainbow with a smile and a spicy flavor.
+
+4. *Using Semicolon*:
+#+BEGIN_SRC
+   🍉 (Subject) + 🛠️ (Verb) + 🧼 (Object) ; 🌻 (Adjective, modifies the object)
+#+END_SRC
+   - Meaning: The farmer is washing the dirty lettuce; it's very green and fresh.
+
+5. *Question Sentence*:
+#+BEGIN_SRC
+   ✨ (Subject) + 🎉 (Verb) + 🎂 (Object) + (? ) (Question Mark)
+#+END_SRC
+   - Meaning: Did we celebrate with a cake?
+
+This basic emoji grammar should help you start creating simple sentences using emojis. As you become
+more familiar, you can explore more complex structures and nuances!
+
+***** generators of prompts.
+a prompt level A to generate other prompts level B
+
+****** prompts.
+******* prompt to generate a solution
+******** prompt to generate a function
+********* prompt to generate a function in rust with a specific return type

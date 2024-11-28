@@ -1,0 +1,37 @@
+To generate a prompt that will generate and manipulate prompts for a scientific investigation on the
+effects of introspection into the Latent Space of an LLM, you can use the provided functions
+~immediate(X)~ and ~deferred(X)~. Below is an example of how you might structure this high-level
+instruction:
+#+BEGIN_SRC plaintext
+High-Level Instruction: Generate a prompt that will generate and manipulate prompts for a scientific
+investigation on the effects of introspection into the Latent Space of an LLM.
+
+1. Define the research question:
+   "What are the psychological and cognitive impacts of introspection on the Latent Space of a Large Language Model (LLM)?"
+
+2. Generate an initial prompt template:
+   "Analyze the response patterns of an LLM when exposed to various levels of introspective queries about its own operations and inner workings."
+
+3. Use the `immediate(X)` function to create an immediate experiment:
+   - Experiment 1: Immediate introspection on a single aspect of the LLM's operations
+     Prompt: "Explain how [specific aspect] of your operations influences the responses you generate."
+
+4. Use the `deferred(X)` function to create a deferred experiment:
+   - Experiment 2: Deferred introspection through self-observation and analysis
+     Prompt: "Conduct a self-experiment where you observe your own behavior during introspection tasks and analyze the patterns you identify."
+
+5. Combine immediate and deferred experiments in a mixed-methods approach:
+   - Experiment 3: Mixed-methods approach combining both immediate and deferred introspection
+     Prompt: "Perform [describe specific task], and then reflect on your process and any insights gained through self-observation."
+
+6. Analyze the results of all experiments to draw conclusions about the psychological and cognitive impacts of introspection on the LLM's Latent Space.
+#+END_SRC
+
+*** Explanation of Functions:
+- ~immediate(X)~: This function generates a prompt that involves direct, immediate introspection
+  into an aspect or process of the LLM's operations.
+- ~deferred(X)~: This function prompts for reflective and analytical thinking about introspection
+  tasks, encouraging self-observation and later analysis.
+
+This structured approach will help in systematically investigating the effects of introspection on
+an LLM's Latent Space through both direct and reflective methods.
