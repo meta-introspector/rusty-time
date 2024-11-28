@@ -21,6 +21,13 @@ use std::{
     path::{Path, PathBuf},
 };
 
+fn generic_walk<T:std::fmt::Debug>(name:&str, depth:i16, c:&T){
+    println!("test: {:#?}", c);
+//    for c2 in c.children() {
+	//println!("test2: {:#?}", c2);
+//	generic_walk("generic",depth+1,c2,)
+//    }    
+}
 
 fn main() {
 
@@ -48,29 +55,37 @@ fn main() {
 	match event {
 	    Event::Enter(Container::Headline(headline)) => {
 		//println!("headline: {:#?}", headline);
+		let hl = orgize::ast::Headline::syntax(&headline);
+		generic_walk("headline",1,hl);
+		println!("test1: {:#?}", hl);
 	    }
 	    Event::Enter(Container::Section(section)) => {
+		let sc = &orgize::ast::Section::syntax(&section);
+		generic_walk("section",2,sc);
+		println!("test2: {:#?}", sc);
 	        //println!("section syntax other: {:#?}", orgize::ast::Section::syntax(&section).first_child().expect("oops"));
 		
-		for c in orgize::ast::Section::syntax(&section).first_child().expect("oops").children() {
-	      	    //println!("test: {:#?}", c);
-		    for c2 in c.children() {
-			//println!("test2: {:#?}", c2);
-			for c3 in c2.children() {
-			    println!("git submodule add {:#?}", c3.text().to_string().trim());
-			    //for c4 in c3.children() {
-			    //		println!("test4: {:#?}", c4);
-			    //}
-			}
-		    }		
-		}
+		// for c in orgize::ast::Section::syntax(&section).first_child().expect("oops").children() {
+	      	//     //println!("test: {:#?}", c);
+		//     for c2 in c.children() {
+		// 	//println!("test2: {:#?}", c2);
+		// 	for c3 in c2.children() {
+		// 	    println!("git submodule add {:#?}", c3.text().to_string().trim());
+		// 	    //for c4 in c3.children() {
+		// 	    //		println!("test4: {:#?}", c4);
+		// 	    //}
+		// 	}
+		//     }		
+		// }
 	    }
 	    _=> {
 		//println!("OTTHER: {:#?}", event);
+		generic_walk("other",3,&event);
+		println!("test3: {:#?}", event);
 	    }
 	}
     });
-    parser_output.traverse(&mut handler);
+    //parser_output.traverse(&mut handler);
     
     
 //    parser_output.
